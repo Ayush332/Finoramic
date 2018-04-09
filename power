@@ -1,0 +1,27 @@
+long long int fast_exp(int base, int exp, int MOD)
+{
+    long long int res=1;
+    long long int base1 =base;
+    if(exp == 0)
+        return 1;
+    if(exp == 1)
+        return base;
+    while(exp > 0)
+    {
+        if(exp%2==1)
+        {
+            res=((res%MOD)*(base1%MOD))%MOD;
+        }
+        base1=((base1%MOD)*(base1%MOD))%MOD;
+        exp=exp/2;
+    }
+    return res%MOD;
+}
+int Solution::pow(int x,int n ,int d)
+{
+    long long int t=fast_exp(x,n,d);
+    if(t<0)
+    return (t+d)%d;
+    else
+    return (t)%d;
+}
